@@ -1,5 +1,14 @@
 // https://www.annuityexpertadvice.com/states-that-dont-tax-retirement-income
 
+const lists = [
+  {id: 'ss', name: 'Social Security'},
+  {id: 'pension', name: 'Pension'},
+  {id: 'TSP', name: 'TSP'},
+  {id: 'income', name: 'Income Tax'},
+  {id: 'sales', name: 'Sales Tax'},
+  {id: 'inheritance', name: 'Inheritance'},
+];
+
 const ss = [
   {state: 'Colorado'},
   {state: 'California'},
@@ -115,4 +124,4 @@ const inheritance = [
   {state: 'Wyoming'},
 ];
 
-export {ss, pension, TSP, income, sales, inheritance};
+export {lists, ss, pension, TSP, income, sales, inheritance};

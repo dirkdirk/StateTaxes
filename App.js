@@ -1,12 +1,12 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import Intersections from './components/Intersections';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View>
-        <Text style={styles.title}>Taxes by US State</Text>
-      </View>
+      <Text style={styles.title}>Taxes by US State</Text>
+      <Intersections />
     </SafeAreaView>
   );
 };
