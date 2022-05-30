@@ -1,6 +1,6 @@
 // https://www.annuityexpertadvice.com/states-that-dont-tax-retirement-income
 
-const data = [
+const DATA = [
   {
     id: 'ss',
     name: 'Social Security',
@@ -136,4 +136,4 @@ const data = [
   },
 ];
 
-export default data;
+export default DATA;

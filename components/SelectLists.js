@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
-import {Pressable, Text, StyleSheet, ScrollView} from 'react-native';
-import data from '../data';
+import {Pressable, Text, StyleSheet, ScrollView, View} from 'react-native';
+import DATA from '../data';
 import DisplayLists from './DisplayLists';
 
 const SelectLists = () => {
-  const [selectedLists, setSelectedLists] = useState([]);
+  const [selectedLists, setSelectedLists] = useState([
+    'ss',
+    'tsp',
+    'inheritance',
+  ]);
+  // const [selectedLists, setSelectedLists] = useState([]);
 
   const toggleSelected = id => {
-    console.log('toggleSelected() id: ', id);
+    // console.log('toggleSelected() id: ', id);
     selectedLists.includes(id)
       ? setSelectedLists(prev => prev.filter(i => i !== id))
       : setSelectedLists(prev => [...prev, id]);
@@ -29,21 +34,28 @@ const SelectLists = () => {
 
   return (
     <>
-      <Text style={styles.title}>Select overlaps</Text>
-      <ScrollView contentContainerStyle={styles.wrapper}>
-        {data.map(item => renderItem({item}))}
-      </ScrollView>
-      <DisplayLists selectedLists={selectedLists} />
+      <View>
+        <Text style={styles.title}>Select overlaps</Text>
+        <ScrollView contentContainerStyle={styles.buttonsWrapper}>
+          {DATA.map(item => renderItem({item}))}
+        </ScrollView>
+      </View>
+      <View>
+        <DisplayLists selectedLists={selectedLists} />
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  buttonsWrapper: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     marginTop: 10,
+    marginBottom: 10,
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   title: {
     fontSize: 22,

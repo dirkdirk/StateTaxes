@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
-import data from '../data';
+import DATA from '../data';
 import {intersection, map} from 'lodash';
 
 const DisplayLists = ({selectedLists}) => {
@@ -12,13 +12,13 @@ const DisplayLists = ({selectedLists}) => {
       // Get an array of arrays of state names for each selectedLists.
       let listStates = map(
         selectedLists,
-        list => data.find(obj => obj.id === list).states,
+        list => DATA.find(obj => obj.id === list).states,
       );
       listStates = listStates.map(stateObj => stateObj.map(obj => obj.name));
       // Get intersection of listStates.
       let commonStates = intersection(...listStates);
       if (commonStates.length > 0) {
-        // Transform into a data obj.
+        // Transform into a DATA obj.
         commonStates = commonStates.map(state => {
           return {name: state};
         });
@@ -34,7 +34,7 @@ const DisplayLists = ({selectedLists}) => {
 
   const renderList = ({list}) => {
     // console.log('renderList()');
-    const listObj = data.find(x => x.id === list);
+    const listObj = DATA.find(x => x.id === list);
     const id = listObj.id;
     const name = listObj.name;
     const states = listObj.states;
@@ -54,11 +54,9 @@ const DisplayLists = ({selectedLists}) => {
     return (
       <View key={id} style={styles.listWrapper}>
         <Text style={styles.listTitle}>{name}</Text>
-        {states.map(state => (
-          <Text key={state.name} style={styles.stateName}>
-            {state.name}
-          </Text>
-        ))}
+        <Text style={styles.stateName}>
+          {states.map(state => state.name + ' ')}
+        </Text>
       </View>
     );
   };
@@ -68,8 +66,8 @@ const DisplayLists = ({selectedLists}) => {
       <>
         <Text style={styles.title}>Lists</Text>
         <ScrollView contentContainerStyle={styles.wrapper}>
-          {selectedLists.map(list => renderList({list}))}
           {commonObj.id && renderCommon()}
+          {selectedLists.map(list => renderList({list}))}
         </ScrollView>
       </>
     )
@@ -78,9 +76,9 @@ const DisplayLists = ({selectedLists}) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
+    // borderWidth: 1,
+    // borderColor: 'blue',
   },
   title: {
     fontSize: 22,
@@ -89,6 +87,8 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 5,
     textAlign: 'center',
+    // borderWidth: 1,
+    // borderColor: 'green',
   },
   listWrapper: {
     margin: 5,
