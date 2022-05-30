@@ -44,9 +44,7 @@ const SelectLists = () => {
           {DATA.map(item => renderItem({item}))}
         </ScrollView>
       </View>
-      <View>
-        <DisplayLists selectedLists={selectedLists} />
-      </View>
+      <DisplayLists selectedLists={selectedLists} />
     </>
   );
 };

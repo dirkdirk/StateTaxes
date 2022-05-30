@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: 10,
     marginHorizontal: 10,
+    paddingBottom: 40,
   },
   listWrapper: {
     margin: 5,
