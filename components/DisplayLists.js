@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   commonWrapper: {
     borderColor: '#fffffffd',
-    backgroundColor: '#ffffff0a',
+    backgroundColor: '#00000019',
   },
   listTitle: {
     color: '#fffffff5',
