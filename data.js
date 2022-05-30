@@ -58,6 +58,19 @@ const DATA = [
     ],
   },
   {
+    id: '401k',
+    name: '401(k)',
+    states: [
+      {name: 'AK'},
+      {name: 'IL'},
+      {name: 'NV'},
+      {name: 'NH'},
+      {name: 'PA'},
+      {name: 'SD'},
+      {name: 'TN'},
+    ],
+  },
+  {
     id: 'income',
     name: 'Income Tax',
     states: [
