@@ -5,7 +5,7 @@ import SelectLists from './components/SelectLists';
 const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Text style={styles.title}>Taxes by US State</Text>
+      <Text style={styles.title}>US States Taxes</Text>
       <SelectLists />
     </SafeAreaView>
   );
@@ -13,13 +13,13 @@ const App = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: '#814',
+    backgroundColor: '#148',
     flex: 1,
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#fffffff5',
     margin: 10,
     textAlign: 'center',
   },

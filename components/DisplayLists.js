@@ -7,7 +7,6 @@ const DisplayLists = ({selectedLists}) => {
   const [commonObj, setCommonObj] = useState({});
 
   useEffect(() => {
-    // console.log('DisplayLists - useEffect()');
     if (selectedLists.length > 1) {
       // Get an array of arrays of state names for each selectedLists.
       let listStates = map(
@@ -29,11 +28,12 @@ const DisplayLists = ({selectedLists}) => {
         };
         setCommonObj(common);
       }
+    } else {
+      setCommonObj({});
     }
   }, [selectedLists]);
 
   const renderList = ({list}) => {
-    // console.log('renderList()');
     const listObj = DATA.find(x => x.id === list);
     const id = listObj.id;
     const name = listObj.name;
@@ -42,19 +42,21 @@ const DisplayLists = ({selectedLists}) => {
   };
 
   const renderCommon = () => {
-    // console.log('renderCommon()');
     const id = commonObj.id;
-    const name = commonObj.name;
+    const name = 'States on ALL the selected lists.';
     const states = commonObj.states;
-    return taxStatesView({id, name, states});
+    const isCommon = true;
+    return taxStatesView({id, name, states, isCommon});
   };
 
-  const taxStatesView = ({id, name, states}) => {
-    // console.log('taxStatesView()');
+  const taxStatesView = ({id, name, states, isCommon = false}) => {
     return (
-      <View key={id} style={styles.listWrapper}>
+      <View
+        key={id}
+        style={[styles.listWrapper, isCommon && styles.commonWrapper]}
+      >
         <Text style={styles.listTitle}>{name}</Text>
-        <Text style={styles.stateName}>
+        <Text style={styles.stateNames}>
           {states.map(state => state.name + ' ')}
         </Text>
       </View>
@@ -63,47 +65,39 @@ const DisplayLists = ({selectedLists}) => {
 
   return (
     selectedLists.length > 0 && (
-      <>
-        <Text style={styles.title}>Lists</Text>
-        <ScrollView contentContainerStyle={styles.wrapper}>
-          {commonObj.id && renderCommon()}
-          {selectedLists.map(list => renderList({list}))}
-        </ScrollView>
-      </>
+      <ScrollView contentContainerStyle={styles.wrapper}>
+        {commonObj.id && renderCommon()}
+        {selectedLists.map(list => renderList({list}))}
+      </ScrollView>
     )
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
+    marginTop: 10,
     marginHorizontal: 10,
-    // borderWidth: 1,
-    // borderColor: 'blue',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#fff',
-    margin: 5,
-    marginTop: 5,
-    textAlign: 'center',
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   listWrapper: {
     margin: 5,
-    padding: 5,
+    padding: 10,
+    paddingBottom: 14,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fffffff0',
     borderRadius: 4,
   },
+  commonWrapper: {
+    borderColor: '#fffffffd',
+    backgroundColor: '#ffffff0a',
+  },
   listTitle: {
-    color: '#fff',
+    color: '#fffffff5',
     fontSize: 18,
     fontWeight: '600',
+    marginBottom: 5,
   },
-  stateName: {
-    color: '#fff',
+  stateNames: {
+    color: '#fffffff5',
     fontSize: 16,
   },
 });
