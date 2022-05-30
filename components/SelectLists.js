@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Pressable, Text, StyleSheet, ScrollView} from 'react-native';
-import {lists} from '../data';
+import data from '../data';
+import DisplayLists from './DisplayLists';
 
-const Intersections = () => {
+const SelectLists = () => {
   const [selectedLists, setSelectedLists] = useState([]);
 
   const toggleSelected = id => {
@@ -30,8 +31,9 @@ const Intersections = () => {
     <>
       <Text style={styles.title}>Select overlaps</Text>
       <ScrollView contentContainerStyle={styles.wrapper}>
-        {lists.map(item => renderItem({item}))}
+        {data.map(item => renderItem({item}))}
       </ScrollView>
+      <DisplayLists selectedLists={selectedLists} />
     </>
   );
 };
@@ -63,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Intersections;
+export default SelectLists;
