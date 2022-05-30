@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 import DATA from '../data';
-import {intersection, map} from 'lodash';
+import {intersection, map, isEmpty} from 'lodash';
+
+const COMMON_DEFAULT = {id: 'common', name: 'Common', states: []};
 
 const DisplayLists = ({selectedLists}) => {
-  const [commonObj, setCommonObj] = useState({});
+  const [commonObj, setCommonObj] = useState(COMMON_DEFAULT);
 
   useEffect(() => {
+    setCommonObj(COMMON_DEFAULT);
     if (selectedLists.length > 1) {
       // Get an array of arrays of state names for each selectedLists.
       let listStates = map(
@@ -28,12 +31,10 @@ const DisplayLists = ({selectedLists}) => {
         };
         setCommonObj(common);
       }
-    } else {
-      setCommonObj({});
     }
   }, [selectedLists]);
 
-  const renderList = ({list}) => {
+  const renderList = list => {
     const listObj = DATA.find(x => x.id === list);
     const id = listObj.id;
     const name = listObj.name;
@@ -44,40 +45,44 @@ const DisplayLists = ({selectedLists}) => {
   const renderCommon = () => {
     const id = commonObj.id;
     const name = 'States on ALL the selected lists.';
-    const states = commonObj.states;
+    const states = isEmpty(commonObj.states)
+      ? [{name: '--'}]
+      : commonObj.states;
     const isCommon = true;
     return taxStatesView({id, name, states, isCommon});
   };
 
-  const taxStatesView = ({id, name, states, isCommon = false}) => {
-    return (
-      <View
-        key={id}
-        style={[styles.listWrapper, isCommon && styles.commonWrapper]}
-      >
-        <Text style={styles.listTitle}>{name}</Text>
-        <Text style={styles.stateNames}>
-          {states.map(state => state.name + ' ')}
-        </Text>
-      </View>
-    );
-  };
+  const taxStatesView = ({id, name, states, isCommon = false}) => (
+    <View
+      key={id}
+      style={[styles.listWrapper, isCommon && styles.commonWrapper]}
+    >
+      <Text style={styles.listTitle}>{name}</Text>
+      <Text style={styles.stateNames}>
+        {states.map(state => state.name + ' ')}
+      </Text>
+    </View>
+  );
 
   return (
     selectedLists.length > 0 && (
-      <ScrollView contentContainerStyle={styles.wrapper}>
+      <>
         {commonObj.id && renderCommon()}
-        {selectedLists.map(list => renderList({list}))}
-      </ScrollView>
+        <FlatList
+          data={selectedLists}
+          keyExtractor={item => item}
+          renderItem={({item}) => renderList(item)}
+          style={styles.wrapper}
+        />
+      </>
     )
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 10,
-    marginHorizontal: 10,
-    paddingBottom: 40,
+    marginTop: 5,
+    marginHorizontal: 5,
   },
   listWrapper: {
     margin: 5,
