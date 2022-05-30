@@ -6,12 +6,7 @@ import DisplayLists from './DisplayLists';
 const TITLE = 'Select states with no taxes';
 
 const SelectLists = () => {
-  const [selectedLists, setSelectedLists] = useState([
-    'ss',
-    'tsp',
-    'inheritance',
-  ]);
-  // const [selectedLists, setSelectedLists] = useState([]);
+  const [selectedLists, setSelectedLists] = useState([]);
 
   const toggleSelected = id => {
     // console.log('toggleSelected() id: ', id);
