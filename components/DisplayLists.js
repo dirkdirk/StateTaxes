@@ -10,27 +10,25 @@ const DisplayLists = ({selectedLists}) => {
 
   useEffect(() => {
     setCommonObj(COMMON_DEFAULT);
-    if (selectedLists.length > 1) {
-      // Get an array of arrays of state names for each selectedLists.
-      let listStates = map(
-        selectedLists,
-        list => DATA.find(obj => obj.id === list).states,
-      );
-      listStates = listStates.map(stateObj => stateObj.map(obj => obj.name));
-      // Get intersection of listStates.
-      let commonStates = intersection(...listStates);
-      if (commonStates.length > 0) {
-        // Transform into a DATA obj.
-        commonStates = commonStates.map(state => {
-          return {name: state};
-        });
-        const common = {
-          id: 'common',
-          name: 'Common',
-          states: commonStates,
-        };
-        setCommonObj(common);
-      }
+    // Get an array of arrays of state names for each selectedLists.
+    let listStates = map(
+      selectedLists,
+      list => DATA.find(obj => obj.id === list).states,
+    );
+    listStates = listStates.map(stateObj => stateObj.map(obj => obj.name));
+    // Get intersection of listStates.
+    let commonStates = intersection(...listStates);
+    if (commonStates.length > 0) {
+      // Transform into a DATA obj.
+      commonStates = commonStates.map(state => {
+        return {name: state};
+      });
+      const common = {
+        id: 'common',
+        name: 'Common',
+        states: commonStates,
+      };
+      setCommonObj(common);
     }
   }, [selectedLists]);
 
