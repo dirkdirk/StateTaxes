@@ -42,7 +42,7 @@ const DisplayLists = ({selectedLists}) => {
 
   const renderCommon = () => {
     const id = commonObj.id;
-    const name = 'States on ALL the selected lists.';
+    const name = 'States on ALL selected lists.';
     const states = isEmpty(commonObj.states)
       ? [{name: '--'}]
       : commonObj.states;
